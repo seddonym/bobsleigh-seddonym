@@ -40,7 +40,7 @@ class WebfactionHandler(InstallationHandler):
         """Webfaction-specific way of detecting whether this
         is the current installation, since several installations
         running on one host."""
-        if self.host == socket.gethostname():
+        if self.config.host == socket.gethostname():
             # Check if virtualenv matches
             virtualenv_path = '/'.join(__file__.split('/')[:5])
             return virtualenv_path == self.config.virtualenv_path
