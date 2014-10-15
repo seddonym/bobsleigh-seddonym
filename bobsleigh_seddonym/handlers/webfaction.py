@@ -1,4 +1,5 @@
 from bobsleigh.conf.handlers import InstallationHandler
+from collections import OrderedDict
 import socket
 
 
@@ -21,7 +22,9 @@ class WebfactionHandler(InstallationHandler):
         return optional_kwargs
 
     def get_config_patterns(self):
-        return {
+        # Because some of the items depend on the setting of ones before,
+        # this needs to be an OrderedDict.
+        return OrderedDict({
             'log_path': '/home/%(webfaction_user)s/logs/user/%(sitename)s',
             'static_path': '/home/%(webfaction_user)s/webapps/%(sitename)s_static',
             'media_path': '/home/%(webfaction_user)s/webapps/%(sitename)s_uploads',
@@ -34,7 +37,7 @@ class WebfactionHandler(InstallationHandler):
             'email_user': '%(prefixed_name)s',
             'db_name': '%(prefixed_name)s',
             'db_user': '%(prefixed_name)s',
-        }
+        })
 
     def is_current(self):
         """Webfaction-specific way of detecting whether this
