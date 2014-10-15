@@ -1,4 +1,5 @@
 from bobsleigh.conf.handlers import InstallationHandler
+import socket
 
 
 class WebfactionHandler(InstallationHandler):
