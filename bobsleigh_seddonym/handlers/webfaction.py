@@ -1,4 +1,5 @@
 from bobsleigh.conf.handlers import InstallationHandler
+from collections import OrderedDict
 import socket
 
 
@@ -21,26 +22,27 @@ class WebfactionHandler(InstallationHandler):
         return optional_kwargs
 
     def get_config_patterns(self):
-        return {
-            'log_path': '/home/%(webfaction_user)s/logs/user/%(sitename)s',
-            'static_path': '/home/%(webfaction_user)s/webapps/%(sitename)s_static',
-            'media_path': '/home/%(webfaction_user)s/webapps/%(sitename)s_uploads',
-            'virtualenv_path': '/home/%(webfaction_user)s/.virtualenvs/%(sitename)s',
-            'project_path': '/home/%(webfaction_user)s/webapps/%(sitename)s/project',
+        # Because some of the items depend on the setting of ones before,
+        # this needs to be an OrderedDict.
+        return (
+            ('log_path', '/home/%(webfaction_user)s/logs/user/%(sitename)s'),
+            ('static_path', '/home/%(webfaction_user)s/webapps/%(sitename)s_static'),
+            ('media_path', '/home/%(webfaction_user)s/webapps/%(sitename)s_uploads'),
+            ('virtualenv_path', '/home/%(webfaction_user)s/.virtualenvs/%(sitename)s'),
+            ('project_path', '/home/%(webfaction_user)s/webapps/%(sitename)s/project'),
             # Set the ability to have a prefixed name - this will
             # be used in place of the sitename for email and database creds
-            'prefixed_name': '%(sitename)s',
-            'email_host': '%(prefixed_name)s',
-            'email_user': '%(prefixed_name)s',
-            'db_name': '%(prefixed_name)s',
-            'db_user': '%(prefixed_name)s',
-        }
+            ('prefixed_name', '%(sitename)s'),
+            ('email_host_user', '%(prefixed_name)s'),
+            ('db_name', '%(prefixed_name)s'),
+            ('db_user', '%(prefixed_name)s'),
+        )
 
     def is_current(self):
         """Webfaction-specific way of detecting whether this
         is the current installation, since several installations
         running on one host."""
-        if self.host == socket.gethostname():
+        if self.config.host == socket.gethostname():
             # Check if virtualenv matches
             virtualenv_path = '/'.join(__file__.split('/')[:5])
             return virtualenv_path == self.config.virtualenv_path
