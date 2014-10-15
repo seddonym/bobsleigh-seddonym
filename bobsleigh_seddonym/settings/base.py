@@ -94,3 +94,14 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 SOUTH_TESTS_MIGRATE = False
 
 ROOT_URLCONF = 'urls'
+
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+)
