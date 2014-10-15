@@ -16,16 +16,16 @@ class LocalHandler(InstallationHandler):
 
     def get_config_patterns(self):
         patterns = super(LocalHandler, self).get_config_patterns()
-        patterns.update({
-            'domain': '%(sitename)s.localhost',
-            'db_name': '%(sitename)s',
-            'db_user': '%(sitename)s',
-            'log_path': '/var/log/django/%(sitename)s',
-            'static_path': '/home/david/var/www/%(sitename)s/static',
-            'media_path': '/home/david/var/www/%(sitename)s/uploads',
-            'virtualenv_path': '/home/david/.virtualenvs/%(sitename)s',
-            'project_path': '/home/david/www/%(sitename)s',
-        })
+        patterns += (
+            ('domain', '%(sitename)s.localhost'),
+            ('db_name', '%(sitename)s'),
+            ('db_user', '%(sitename)s'),
+            ('log_path', '/var/log/django/%(sitename)s'),
+            ('static_path', '/home/david/var/www/%(sitename)s/static'),
+            ('media_path', '/home/david/var/www/%(sitename)s/uploads'),
+            ('virtualenv_path', '/home/david/.virtualenvs/%(sitename)s'),
+            ('project_path', '/home/david/www/%(sitename)s'),
+        )
         return patterns
 
 
@@ -46,14 +46,14 @@ class VagrantHandler(InstallationHandler):
 
     def get_config_patterns(self):
         patterns = super(LocalHandler, self).get_config_patterns()
-        patterns.update({
-            'domain': '%(sitename)s.vagrant',
-            'db_name': '%(sitename)s',
-            'db_user': '%(sitename)s',
-            'log_path': '/var/log/django',
-            'static_path': '/opt/site/static',
-            'media_path': '/opt/site/uploads',
-            'virtualenv_path': '/opt/site/.virtualenvs/site',
-            'project_path': '/opt/site/django',
-        })
+        patterns += (
+            ('domain', '%(sitename)s.vagrant'),
+            ('db_name', '%(sitename)s'),
+            ('db_user', '%(sitename)s'),
+            ('log_path', '/var/log/django'),
+            ('static_path', '/opt/site/static'),
+            ('media_path', '/opt/site/uploads'),
+            ('virtualenv_path', '/opt/site/.virtualenvs/site'),
+            ('project_path', '/opt/site/django'),
+        )
         return patterns

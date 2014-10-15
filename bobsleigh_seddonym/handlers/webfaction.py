@@ -24,20 +24,20 @@ class WebfactionHandler(InstallationHandler):
     def get_config_patterns(self):
         # Because some of the items depend on the setting of ones before,
         # this needs to be an OrderedDict.
-        return OrderedDict({
-            'log_path': '/home/%(webfaction_user)s/logs/user/%(sitename)s',
-            'static_path': '/home/%(webfaction_user)s/webapps/%(sitename)s_static',
-            'media_path': '/home/%(webfaction_user)s/webapps/%(sitename)s_uploads',
-            'virtualenv_path': '/home/%(webfaction_user)s/.virtualenvs/%(sitename)s',
-            'project_path': '/home/%(webfaction_user)s/webapps/%(sitename)s/project',
+        return (
+            ('log_path', '/home/%(webfaction_user)s/logs/user/%(sitename)s'),
+            ('static_path', '/home/%(webfaction_user)s/webapps/%(sitename)s_static'),
+            ('media_path', '/home/%(webfaction_user)s/webapps/%(sitename)s_uploads'),
+            ('virtualenv_path', '/home/%(webfaction_user)s/.virtualenvs/%(sitename)s'),
+            ('project_path', '/home/%(webfaction_user)s/webapps/%(sitename)s/project'),
             # Set the ability to have a prefixed name - this will
             # be used in place of the sitename for email and database creds
-            'prefixed_name': '%(sitename)s',
-            'email_host': '%(prefixed_name)s',
-            'email_user': '%(prefixed_name)s',
-            'db_name': '%(prefixed_name)s',
-            'db_user': '%(prefixed_name)s',
-        })
+            ('prefixed_name', '%(sitename)s'),
+            ('email_host', '%(prefixed_name)s'),
+            ('email_host_user', '%(prefixed_name)s'),
+            ('db_name', '%(prefixed_name)s'),
+            ('db_user', '%(prefixed_name)s'),
+        )
 
     def is_current(self):
         """Webfaction-specific way of detecting whether this
