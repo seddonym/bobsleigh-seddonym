@@ -16,7 +16,7 @@ LANGUAGE_CODE = 'en-GB'
 LANGUAGES = (
     ('en-GB', 'British English'),
 )
-
+SITE_ID = 1
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
