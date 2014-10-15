@@ -11,6 +11,10 @@ class LocalHandler(InstallationHandler):
         optional_kwargs = super(LocalHandler, self).get_optional_kwargs()
         optional_kwargs.update({
             'host': 'lanky',
+            'email_host': 'smtp.gmail.com',
+            'email_use_tls': True,
+            'email_port': 587,
+            'email_host_user': 'davidseddonis@gmail.com',
         })
         return optional_kwargs
 
@@ -27,6 +31,11 @@ class LocalHandler(InstallationHandler):
             ('project_path', '/home/david/www/%(sitename)s'),
         )
         return patterns
+
+    def adjust(self):
+        super(LocalHandler, self).adjust()
+        self._settings['EMAIL_USE_TLS'] = self.config.email_use_tls
+        self._settings['EMAIL_PORT'] = self.config.email_port
 
 
 class VagrantHandler(InstallationHandler):
