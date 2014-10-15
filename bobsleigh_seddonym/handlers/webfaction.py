@@ -33,7 +33,6 @@ class WebfactionHandler(InstallationHandler):
             # Set the ability to have a prefixed name - this will
             # be used in place of the sitename for email and database creds
             ('prefixed_name', '%(sitename)s'),
-            ('email_host', '%(prefixed_name)s'),
             ('email_host_user', '%(prefixed_name)s'),
             ('db_name', '%(prefixed_name)s'),
             ('db_user', '%(prefixed_name)s'),
