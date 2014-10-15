@@ -29,6 +29,7 @@ class LocalHandler(InstallationHandler):
             ('media_path', '/home/david/var/www/%(sitename)s/uploads'),
             ('virtualenv_path', '/home/david/.virtualenvs/%(sitename)s'),
             ('project_path', '/home/david/www/%(sitename)s'),
+            ('server_email', 'contact@%(domain)s'),
         )
         return patterns
 
