@@ -11,6 +11,8 @@ class LocalHandler(InstallationHandler):
         optional_kwargs = super(LocalHandler, self).get_optional_kwargs()
         optional_kwargs.update({
             'host': 'lanky',
+            'debug': True,
+            'monitor': True,
             'email_host': 'smtp.gmail.com',
             'email_use_tls': True,
             'email_port': 587,
@@ -29,6 +31,7 @@ class LocalHandler(InstallationHandler):
             ('media_path', '/home/david/var/www/%(sitename)s/uploads'),
             ('virtualenv_path', '/home/david/.virtualenvs/%(sitename)s'),
             ('project_path', '/home/david/www/%(sitename)s'),
+            ('server_email', '%(email_host_user)s'),
         )
         return patterns
 
