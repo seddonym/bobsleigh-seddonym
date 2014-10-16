@@ -45,19 +45,17 @@ class VagrantHandler(InstallationHandler):
     "Geared up towards Vagrant machines."
 
     def get_required_kwargs(self):
-        required_kwargs = super(VagrantHandler, self).get_required_kwargs()
-        required_kwargs += 'sitename'
-        return required_kwargs
+        return ('sitename',)
 
     def get_optional_kwargs(self):
-        optional_kwargs = super(LocalHandler, self).get_optional_kwargs()
+        optional_kwargs = super(VagrantHandler, self).get_optional_kwargs()
         optional_kwargs.update({
             'host': 'precise32',
         })
         return optional_kwargs
 
     def get_config_patterns(self):
-        patterns = super(LocalHandler, self).get_config_patterns()
+        patterns = super(VagrantHandler, self).get_config_patterns()
         patterns += (
             ('domain', '%(sitename)s.vagrant'),
             ('db_name', '%(sitename)s'),
