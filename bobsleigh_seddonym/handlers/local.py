@@ -11,6 +11,8 @@ class LocalHandler(InstallationHandler):
         optional_kwargs = super(LocalHandler, self).get_optional_kwargs()
         optional_kwargs.update({
             'host': 'lanky',
+            'debug': True,
+            'monitor': True,
             'email_host': 'smtp.gmail.com',
             'email_use_tls': True,
             'email_port': 587,
