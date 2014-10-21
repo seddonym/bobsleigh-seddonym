@@ -18,6 +18,7 @@ class WebfactionHandler(InstallationHandler):
         optional_kwargs = super(WebfactionHandler, self).get_optional_kwargs()
         optional_kwargs.update({
             'email_host': 'smtp.webfaction.com',
+            'protocol': 'http',
         })
         return optional_kwargs
 
@@ -36,7 +37,12 @@ class WebfactionHandler(InstallationHandler):
             ('email_host_user', '%(prefixed_name)s'),
             ('db_name', '%(prefixed_name)s'),
             ('db_user', '%(prefixed_name)s'),
+            ('base_url', '%(protocol)s://%(domain)s'),
         )
+
+    def adjust(self):
+        super(WebfactionHandler, self).adjust()
+        self._settings['BASE_URL'] = self.config.base_url
 
     def is_current(self):
         """Webfaction-specific way of detecting whether this
