@@ -17,6 +17,7 @@ class LocalHandler(InstallationHandler):
             'email_use_tls': True,
             'email_port': 587,
             'email_host_user': 'davidseddonis@gmail.com',
+            'protocol': 'http',
         })
         return optional_kwargs
 
@@ -24,6 +25,7 @@ class LocalHandler(InstallationHandler):
         patterns = super(LocalHandler, self).get_config_patterns()
         patterns += (
             ('domain', '%(sitename)s.localhost'),
+            ('base_url', '%(protocol)s://%(domain)s'),
             ('db_name', '%(sitename)s'),
             ('db_user', '%(sitename)s'),
             ('log_path', '/var/log/django/%(sitename)s'),
@@ -39,6 +41,7 @@ class LocalHandler(InstallationHandler):
         super(LocalHandler, self).adjust()
         self._settings['EMAIL_USE_TLS'] = self.config.email_use_tls
         self._settings['EMAIL_PORT'] = self.config.email_port
+        self._settings['BASE_URL'] = self.config.base_url
 
 
 class VagrantHandler(InstallationHandler):
