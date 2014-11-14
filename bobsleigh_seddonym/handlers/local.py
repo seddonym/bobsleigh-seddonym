@@ -54,6 +54,11 @@ class VagrantHandler(InstallationHandler):
         optional_kwargs = super(VagrantHandler, self).get_optional_kwargs()
         optional_kwargs.update({
             'host': 'precise32',
+            'protocol': 'http',
+            'debug': True,
+            'monitor': True,
+            'db_name': 'site',
+            'db_user': 'site',
         })
         return optional_kwargs
 
@@ -61,8 +66,7 @@ class VagrantHandler(InstallationHandler):
         patterns = super(VagrantHandler, self).get_config_patterns()
         patterns += (
             ('domain', '%(sitename)s.vagrant'),
-            ('db_name', '%(sitename)s'),
-            ('db_user', '%(sitename)s'),
+            ('base_url', '%(protocol)s://%(domain)s'),
             ('log_path', '/var/log/django'),
             ('static_path', '/opt/site/static'),
             ('media_path', '/opt/site/uploads'),
@@ -70,3 +74,7 @@ class VagrantHandler(InstallationHandler):
             ('project_path', '/opt/site/django'),
         )
         return patterns
+
+    def adjust(self):
+        super(VagrantHandler, self).adjust()
+        self._settings['BASE_URL'] = self.config.base_url
